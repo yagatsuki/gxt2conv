@@ -1,11 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36221.1 d17.14
+VisualStudioVersion = 17.14.36221.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gxt2conv\gxt2conv", "gxt2conv\gxt2conv.vcxproj", "{9D3214E4-AC09-4358-A8B0-82955C05610E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gxt2conv", "gxt2conv\gxt2conv.vcxproj", "{9D3214E4-AC09-4358-A8B0-82955C05610E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GXT2Converter\GXT2Converter", "GXT2Converter\GXT2Converter.vcxproj", "{8B009412-E2B7-4611-86BA-3E181F6595BD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GXT2Converter", "GXT2Converter\GXT2Converter.vcxproj", "{8B009412-E2B7-4611-86BA-3E181F6595BD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ソリューション項目", "ソリューション項目", "{2022CB0F-8BAF-F49E-0C48-8EF4C96EC109}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
