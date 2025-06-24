@@ -2,7 +2,8 @@
 #include <windows.h>
 #include <unordered_map>
 
-I18n::I18n() {
+I18n::I18n()
+{
     LANGID lang = GetUserDefaultUILanguage();
     if (PRIMARYLANGID(lang) == LANG_JAPANESE)
         m_lang = Language::Japanese;
@@ -10,38 +11,49 @@ I18n::I18n() {
         m_lang = Language::English;
 }
 
-std::wstring I18n::get(const std::wstring& key) const {
-    static const std::unordered_map<std::wstring, std::wstring> en = {
+std::unordered_map<std::string, std::unordered_map<std::wstring, std::wstring>> i18nTable = {
+    {"en", {
         {L"err_load_gxt2", L"Failed to load GXT2 file: "},
-        {L"err_load_txt",  L"Failed to load TXT file: "},
+        {L"err_load_txt", L"Failed to load TXT file: "},
         {L"err_save_gxt2", L"Failed to save GXT2 file: "},
-        {L"err_save_txt",  L"Failed to save TXT file: "},
+        {L"err_save_txt", L"Failed to save TXT file: "},
         {L"usage", L"Usage: GXT2Converter <file_or_folder>"},
         {L"help", L"Options:\n  -h, --help     Show this help message\n"},
         {L"processing_file", L"Processing file: "},
         {L"processing_dir", L"Processing directory: "},
         {L"saved_gxt2", L"Saved GXT2 file: "},
-        {L"saved_txt",  L"Saved TXT file: "},
+        {L"saved_txt", L"Saved TXT file: "},
         {L"unsupported_ext", L"Unsupported file extension: "}
-    };
+    }},
+    {"ja", {
+        {L"err_load_gxt2", L"GXT2ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ: "},
+        {L"err_load_txt", L"TXTãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ: "},
+        {L"err_save_gxt2", L"GXT2ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¿å­˜ã«å¤±æ•—ã—ã¾ã—ãŸ: "},
+        {L"err_save_txt", L"TXTãƒ•ã‚¡ã‚¤ãƒ«ã®ä¿å­˜ã«å¤±æ•—ã—ã¾ã—ãŸ: "},
+        {L"usage", L"ä½¿ã„æ–¹: GXT2Converter <ãƒ•ã‚¡ã‚¤ãƒ«ã¾ãŸã¯ãƒ•ã‚©ãƒ«ãƒ€>"},
+        {L"help", L"ã‚ªãƒ—ã‚·ãƒ§ãƒ³:\n  -h, --help     ãƒ˜ãƒ«ãƒ—è¡¨ç¤º\n"},
+        {L"processing_file", L"ãƒ•ã‚¡ã‚¤ãƒ«ã‚’å‡¦ç†ä¸­: "},
+        {L"processing_dir", L"ãƒ•ã‚©ãƒ«ãƒ€ã‚’å‡¦ç†ä¸­: "},
+        {L"saved_gxt2", L"GXT2ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä¿å­˜ã—ã¾ã—ãŸ: "},
+        {L"saved_txt", L"TXTãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä¿å­˜ã—ã¾ã—ãŸ: "},
+        {L"unsupported_ext", L"å¯¾å¿œã—ã¦ã„ãªã„ãƒ•ã‚¡ã‚¤ãƒ«æ‹¡å¼µå­ã§ã™: "}
+    }}
+};
 
-    static const std::unordered_map<std::wstring, std::wstring> ja = {
-        {L"err_load_gxt2", L"GXT2ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½: "},
-        {L"err_load_txt",  L"TXTƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½: "},
-        {L"err_save_gxt2", L"GXT2ƒtƒ@ƒCƒ‹‚Ì•Û‘¶‚É¸”s‚µ‚Ü‚µ‚½: "},
-        {L"err_save_txt",  L"TXTƒtƒ@ƒCƒ‹‚Ì•Û‘¶‚É¸”s‚µ‚Ü‚µ‚½: "},
-        {L"usage", L"g‚¢•û: GXT2Converter <ƒtƒ@ƒCƒ‹‚Ü‚½‚ÍƒtƒHƒ‹ƒ_>"},
-        {L"help", L"ƒIƒvƒVƒ‡ƒ“:\n  -h, --help     ƒwƒ‹ƒv•\¦\n"},
-        {L"processing_file", L"ƒtƒ@ƒCƒ‹‚ğˆ—’†: "},
-        {L"processing_dir", L"ƒtƒHƒ‹ƒ_‚ğˆ—’†: "},
-        {L"saved_gxt2", L"GXT2ƒtƒ@ƒCƒ‹‚ğ•Û‘¶‚µ‚Ü‚µ‚½: "},
-        {L"saved_txt",  L"TXTƒtƒ@ƒCƒ‹‚ğ•Û‘¶‚µ‚Ü‚µ‚½: "},
-        {L"unsupported_ext", L"‘Î‰‚µ‚Ä‚¢‚È‚¢ƒtƒ@ƒCƒ‹Šg’£q‚Å‚·: "}
-    };
+std::wstring I18n::get(const std::wstring &key) const
+{
+    static std::string locale = (m_lang == Language::Japanese) ? "ja" : "en";
 
-    const auto& dict = (m_lang == Language::Japanese) ? ja : en;
-    auto it = dict.find(key);
-    if (it != dict.end())
+    // ãƒ­ã‚±ãƒ¼ãƒ«ã«å¯¾å¿œã—ã¦ã„ãªã„å ´åˆã¯è‹±èªã‚’ä½¿ã†
+    const auto &langMap = i18nTable.count(locale) ? i18nTable[locale] : i18nTable["en"];
+
+    // å¯¾å¿œã™ã‚‹ã‚­ãƒ¼ãŒå­˜åœ¨ã™ã‚‹ã‹ç¢ºèª
+    auto it = langMap.find(key);
+    if (it != langMap.end())
+    {
         return it->second;
+    }
+
+    // è¦‹ã¤ã‹ã‚‰ãªã‘ã‚Œã°ã‚­ãƒ¼ãã®ã‚‚ã®ã‚’è¿”ã™
     return L"[Undefined i18n key]";
 }
