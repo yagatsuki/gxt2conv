@@ -60,7 +60,6 @@ GXT2Converter ./locales
 
 ## 連絡先
 
-yagatsuki
 [X @yagatsuki](https://x.com/yagatsuki)
 
 ---
