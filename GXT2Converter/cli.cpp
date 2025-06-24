@@ -84,9 +84,6 @@ bool CLI::processDirectory(const std::wstring& dirPath) {
                 allSuccess = false;
             }
         }
-        else {
-            // 他拡張子はスキップ
-        }
     }
 
     return allSuccess;
