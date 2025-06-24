@@ -2,6 +2,7 @@
 #define GXT2CONV_H
 
 #include <cstdint>
+#include <unordered_map>
 #include <string>
 #include <vector>
 #include <map>
@@ -49,6 +50,8 @@ public:
 
     void clear();
 
+    void setHashKeyMap(const std::unordered_map<uint32_t, std::wstring>& map);
+
     bool load(const std::wstring& filePath);
     bool save(const std::wstring& filePath) const;
 
@@ -66,11 +69,10 @@ public:
     std::vector<Entry> entries() const;
 
 private:
+    std::unordered_map<uint32_t, std::wstring> m_hashKeyMap; // ハッシュ→文字列キー変換マップ
     uint32_t m_languageCode;
     Endian m_endian;
     std::map<std::wstring, std::wstring> m_entries;
-
-    static uint32_t CalculateHashFromWString(const std::wstring& key);
 };
 
 extern "C" {
